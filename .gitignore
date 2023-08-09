@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Search_Statistics/bin/Debug/net6.0
+/Search_Statistics/obj
+/StarTrack_Work_Assessment/bin/Debug/net6.0
+/StarTrack_Work_Assessment/obj
+/.vs/StarTrack_Work_Assessment
