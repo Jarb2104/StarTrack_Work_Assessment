@@ -14,7 +14,8 @@ namespace Search_Statistics
         public DbSet<QueryResult> QueryResults { get; set; }
         public DbSet<SiteQuery> SiteQueries { get; set; }
 
-        public Search_Statistics_Context(DbContextOptions<Search_Statistics_Context> options)
-            : base(options) { }
+        public Search_Statistics_Context(DbContextOptions<Search_Statistics_Context> options) : base(options) 
+        {
+        }
     }
 }
