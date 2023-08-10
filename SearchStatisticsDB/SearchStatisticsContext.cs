@@ -5,11 +5,11 @@ namespace SearchStatisticsDB
 {
     public class SearchStatisticsContext : DbContext
     {
+        //Generating table relations with DB
         public DbSet<QueryResult> QueryResults { get; set; }
         public DbSet<StackExchangeCall> StackExchangeCalls { get; set; }
 
-        public SearchStatisticsContext(DbContextOptions<SearchStatisticsContext> options) : base(options) 
-        {
-        }
+        //Generating context to connect to DB
+        public SearchStatisticsContext(DbContextOptions<SearchStatisticsContext> options) : base(options) { }
     }
 }

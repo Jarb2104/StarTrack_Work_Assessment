@@ -1,5 +1,6 @@
 ﻿namespace StackExchangeQueryTracker.Models
 {
+    //Model to call the endpoint for calling the StackExchange endpoint
     public class QueryStackExchangeModel
     {
         public int Page { get; set; }

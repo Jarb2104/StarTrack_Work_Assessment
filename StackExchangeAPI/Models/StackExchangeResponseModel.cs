@@ -1,5 +1,6 @@
 ﻿namespace StackExchangeQueryTracker.Models
 {
+    //Full StackExchange return data model
     public class StackExchangeResponseModel
     {
         public StackOverflowPost[] items { get; set; } = null!;

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackExchangeQueryTracker", "StarTrack_Work_Assessment\StackExchangeQueryTracker.csproj", "{8973B71A-5B0B-4DB5-9287-2AF71911382D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackExchangeQueryTracker", "StackExchangeQueryTracker\StackExchangeQueryTracker.csproj", "{8973B71A-5B0B-4DB5-9287-2AF71911382D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchStatisticsDB", "Search_Statistics\SearchStatisticsDB.csproj", "{C87BAC31-5D05-401C-96AB-157FDF75657C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchStatisticsDB", "SearchStatisticsDB\SearchStatisticsDB.csproj", "{C87BAC31-5D05-401C-96AB-157FDF75657C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackExchangeAPI", "StackExchangeAPI\StackExchangeAPI.csproj", "{C03A3A79-DC8E-466F-BB60-E321932A84D8}"
 EndProject

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using StackExchangeQueryTracker.Utilities;
 using SearchStatisticsDB;
+using SearchStatisticsDB.Repositories;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<SearchStatisticsContext>(options => options.UseSqlite(SearchStatisticsConfigurations.configuration.GetConnectionString("SearchStatisticsDB:SQLite")));
+builder.Services.AddScoped<ISearchStatisticsDBRepository, SearchStatisticsDBRepository>();
+builder.Services.AddDbContext<SearchStatisticsContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("SearchStatisticsDB:SQLite")));
 
 WebApplication app = builder.Build();
 
