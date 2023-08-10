@@ -1,4 +1,4 @@
-﻿namespace StarTrack_Work_Assessment.Models
+﻿namespace StackExchangeQueryTracker.Models
 {
     public class StackOverflowPost
     {

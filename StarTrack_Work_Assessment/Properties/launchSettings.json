@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "StarTrack_Work_Assessment": {
+    "StackExchangeQueryTracker": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

@@ -1,21 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using API.Controllers;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Search_Statistics;
-using Search_Statistics.Entities;
-using StarTrack_Work_Assessment.Models;
-using StarTrack_Work_Assessment.Utilities;
+using SearchStatisticsDB;
+using SearchStatisticsDB.Entities;
+using SearchStatisticsDB.Repositories;
+using StackExchangeQueryTracker.Models;
+using StackExchangeQueryTracker.Utilities;
 
-namespace StarTrack_Work_Assessment.Controllers
+namespace StackExchangeQueryTracker.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class QueryController : Controller
+    public class QueryController : BaseApiController
     {
-        private readonly Search_Statistics_Context _dbContext;
+        private readonly IStackExchangeCallRepository _repository;
 
-        public QueryController(Search_Statistics_Context dbContext) {
-            _dbContext = dbContext;
+        public QueryController(IStackExchangeCallRepository repository) {
+            _repository = repository;
         }
 
         [HttpGet(Name = "QueryStackExchange")]
@@ -30,11 +30,6 @@ namespace StarTrack_Work_Assessment.Controllers
 
             hashSearch = Tools.GetQueryHash(query);
             
-            IEnumerable<SiteQuery> result = 
-                _dbContext.SiteQueries
-                    .Include(sq => sq.Results)
-                    .Where(sq => sq.QueryID == hashSearch)
-                    .AsEnumerable();
 
             return Ok("Okay!");
         }

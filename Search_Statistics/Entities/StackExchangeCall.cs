@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Search_Statistics.Entities
+namespace SearchStatisticsDB.Entities
 {
-    public class SiteQuery
+    public class StackExchangeCall
     {
         public int QueryID { get; set; }
         public int Page { get; set; }

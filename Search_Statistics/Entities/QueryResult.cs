@@ -1,4 +1,4 @@
-﻿namespace Search_Statistics.Entities
+﻿namespace SearchStatisticsDB.Entities
 {
     public class QueryResult
     {

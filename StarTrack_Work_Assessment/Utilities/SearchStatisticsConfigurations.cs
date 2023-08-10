@@ -1,4 +1,4 @@
-﻿namespace StarTrack_Work_Assessment.Utilities
+﻿namespace StackExchangeQueryTracker.Utilities
 {
     public static class SearchStatisticsConfigurations
     {

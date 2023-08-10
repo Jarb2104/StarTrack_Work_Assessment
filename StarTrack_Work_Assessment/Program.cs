@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Search_Statistics;
-using StarTrack_Work_Assessment.Utilities;
+using StackExchangeQueryTracker.Utilities;
+using SearchStatisticsDB;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<Search_Statistics_Context>(options => options.UseSqlite(SearchStatisticsConfigurations.configuration.GetConnectionString("SearchStatisticsDB:SQLite")));
+builder.Services.AddDbContext<SearchStatisticsContext>(options => options.UseSqlite(SearchStatisticsConfigurations.configuration.GetConnectionString("SearchStatisticsDB:SQLite")));
 
 WebApplication app = builder.Build();
 

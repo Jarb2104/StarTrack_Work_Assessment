@@ -1,6 +1,6 @@
-﻿using StarTrack_Work_Assessment.Models;
+﻿using StackExchangeQueryTracker.Models;
 
-namespace StarTrack_Work_Assessment.Utilities
+namespace StackExchangeQueryTracker.Utilities
 {
     public static class Tools
     {

@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Search_Statistics;
-using StarTrack_Work_Assessment.Models;
+﻿using API.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using SearchStatisticsDB;
+using StackExchangeQueryTracker.Models;
 
-namespace StarTrack_Work_Assessment.Controllers
+namespace StackExchangeQueryTracker.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class StatisticsController : Controller
+    public class StatisticsController : BaseApiController
     {
-        private readonly Search_Statistics_Context _dbContext;
+        private readonly SearchStatisticsContext _dbContext;
 
-        public StatisticsController(Search_Statistics_Context dbContext)
+        public StatisticsController(SearchStatisticsContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        [HttpGet(Name = "GetQueryStatistics")]
+        [HttpGet]
         public IActionResult Get(QueryStackExchangeModel query)
         {
 
