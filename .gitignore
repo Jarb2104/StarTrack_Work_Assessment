@@ -11,3 +11,9 @@
 /StackExchangeAPI/obj
 /Utilities/bin/Debug/net6.0
 /Utilities/obj
+/.vs
+/SearchStatisticsDB/bin/Debug/net6.0
+/SearchStatisticsDB/obj
+/StackExchangeQueryTracker/bin/Debug/net6.0
+/StackExchangeQueryTracker/obj
+/StackExchangeQueryTracker/SearchStatistics.db
