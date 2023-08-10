@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackExchangeQueryTracker",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchStatisticsDB", "Search_Statistics\SearchStatisticsDB.csproj", "{C87BAC31-5D05-401C-96AB-157FDF75657C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackExchangeAPI", "StackExchangeAPI\StackExchangeAPI.csproj", "{C03A3A79-DC8E-466F-BB60-E321932A84D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{34A2E29C-B5AD-4682-9892-27AC85E6DA24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{C87BAC31-5D05-401C-96AB-157FDF75657C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C87BAC31-5D05-401C-96AB-157FDF75657C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C87BAC31-5D05-401C-96AB-157FDF75657C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03A3A79-DC8E-466F-BB60-E321932A84D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03A3A79-DC8E-466F-BB60-E321932A84D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03A3A79-DC8E-466F-BB60-E321932A84D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03A3A79-DC8E-466F-BB60-E321932A84D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34A2E29C-B5AD-4682-9892-27AC85E6DA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A2E29C-B5AD-4682-9892-27AC85E6DA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A2E29C-B5AD-4682-9892-27AC85E6DA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A2E29C-B5AD-4682-9892-27AC85E6DA24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

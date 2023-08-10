@@ -1,4 +1,6 @@
-﻿namespace StackExchangeQueryTracker.Utilities
+﻿using Microsoft.Extensions.Configuration;
+
+namespace StackExchangeQueryTracker.Utilities
 {
     public static class SearchStatisticsConfigurations
     {

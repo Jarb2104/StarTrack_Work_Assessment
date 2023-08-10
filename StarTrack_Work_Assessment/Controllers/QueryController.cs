@@ -1,20 +1,18 @@
 ﻿using API.Controllers;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using SearchStatisticsDB;
 using SearchStatisticsDB.Entities;
 using SearchStatisticsDB.Repositories;
 using StackExchangeQueryTracker.Models;
 using StackExchangeQueryTracker.Utilities;
+using StackExchangeQueryTracker.StackExchangeAPI;
 
 namespace StackExchangeQueryTracker.Controllers
 {
     public class QueryController : BaseApiController
     {
-        private readonly IStackExchangeCallRepository _repository;
+        private readonly ISearchStatisticsDBRepository _repository;
 
-        public QueryController(IStackExchangeCallRepository repository) {
+        public QueryController(ISearchStatisticsDBRepository repository) {
             _repository = repository;
         }
 
@@ -22,14 +20,11 @@ namespace StackExchangeQueryTracker.Controllers
         public IActionResult Get(QueryStackExchangeModel query)
         {
             int hashSearch;
-
-            if (string.IsNullOrWhiteSpace(query.Site))
-            {
-                query.Site = SearchStatisticsConfigurations.configuration.GetValue<string>("StackExchange:Query:Site");
-            }
-
-            hashSearch = Tools.GetQueryHash(query);
             
+            StackExchangeAPI
+            hashSearch = Tools.GetQueryHash(query.Page, query.PageSize, query.InTitle, query.Site);
+            ValueTask<StackExchangeCall?> SeachQueryStatisticsCall = _repository.StackExchangeCall.FindStackExchangeCall(hashSearch);
+
 
             return Ok("Okay!");
         }
