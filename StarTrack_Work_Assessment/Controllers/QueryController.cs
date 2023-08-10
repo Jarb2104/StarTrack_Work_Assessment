@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Search_Statistics;
+using Search_Statistics.Entities;
+using StarTrack_Work_Assessment.Models;
+using StarTrack_Work_Assessment.Utilities;
 
 namespace StarTrack_Work_Assessment.Controllers
 {
@@ -14,8 +19,23 @@ namespace StarTrack_Work_Assessment.Controllers
         }
 
         [HttpGet(Name = "QueryStackExchange")]
-        public IActionResult Get()
+        public IActionResult Get(QueryStackExchangeModel query)
         {
+            int hashSearch;
+
+            if (string.IsNullOrWhiteSpace(query.Site))
+            {
+                query.Site = SearchStatisticsConfigurations.configuration.GetValue<string>("StackExchange:Query:Site");
+            }
+
+            hashSearch = Tools.GetQueryHash(query);
+            
+            IEnumerable<SiteQuery> result = 
+                _dbContext.SiteQueries
+                    .Include(sq => sq.Results)
+                    .Where(sq => sq.QueryID == hashSearch)
+                    .AsEnumerable();
+
             return Ok("Okay!");
         }
     }
