@@ -9,4 +9,4 @@ Once there run the 2 following commands
 
 Once that's done the project can be run normally.
 It should open a window with a Swagger interface to call the endpoints of the WebApi.
-If you want to try and run and endpoint you can click on "try out" and it should give you the ability to run the endpoint.
+If you want to try endpoints you can click on "try out" and it should give you the ability to run the endpoint.
