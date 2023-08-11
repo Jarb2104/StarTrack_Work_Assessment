@@ -17,3 +17,6 @@
 /StackExchangeQueryTracker/bin/Debug/net6.0
 /StackExchangeQueryTracker/obj
 /StackExchangeQueryTracker/SearchStatistics.db
+/SearchStatisticsDB/Migrations/20230810235814_CreateDB.cs
+/SearchStatisticsDB/Migrations/20230810235814_CreateDB.Designer.cs
+/SearchStatisticsDB/Migrations/SearchStatisticsContextModelSnapshot.cs
