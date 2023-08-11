@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using StackExchangeQueryTracker.Utilities;
 using SearchStatisticsDB;
 using SearchStatisticsDB.Repositories;
 

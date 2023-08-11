@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Configuration;
 using StackExchangeQueryTracker.Models;
-using StackExchangeQueryTracker.Utilities;
+using System.Net;
 using System.Text.Json;
 
 namespace StackExchangeQueryTracker.StackExchangeAPI
@@ -14,7 +13,11 @@ namespace StackExchangeQueryTracker.StackExchangeAPI
             StackExchangeResponseModel responseModel;
 
             //Setting up the client for the API call
-            HttpClient client = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler()
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+            HttpClient client = new HttpClient(handler);
             client.BaseAddress = new Uri(URL);
             Dictionary<string, string> parameters = new Dictionary<string, string>
             {
@@ -26,7 +29,6 @@ namespace StackExchangeQueryTracker.StackExchangeAPI
 
             //Doing te API call
             HttpResponseMessage response = await client.GetAsync(QueryHelpers.AddQueryString(endPoint, parameters));
-
             //Checking if the response was succesfull
             if (response.IsSuccessStatusCode)
             {

@@ -6,7 +6,7 @@ namespace SearchStatisticsDB.Entities
     public class StackExchangeCall
     {
         [Key]
-        public int QueryID { get; set; }
+        public Guid QueryID { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
 

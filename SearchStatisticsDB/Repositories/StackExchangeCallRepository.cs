@@ -1,4 +1,6 @@
-﻿using SearchStatisticsDB.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SearchStatisticsDB.Entities;
+using StackExchangeQueryTracker.Models;
 
 namespace SearchStatisticsDB.Repositories
 {
@@ -11,9 +13,11 @@ namespace SearchStatisticsDB.Repositories
             _dbContext = dbContext;
         }
 
-        public ValueTask<StackExchangeCall?> FindStackExchangeCall(int stackExchangeId)
+        public Task<StackExchangeCall?> FindStackExchangeCall(QueryStackExchangeModel query)
         {
-            return _dbContext.StackExchangeCalls.FindAsync(stackExchangeId);
+            return _dbContext.StackExchangeCalls
+                .Where(sec => sec.Page == query.Page && sec.PageSize == query.PageSize && sec.InTitle.Equals(query.InTitle) && sec.Site.Equals(query.Site))
+                .FirstOrDefaultAsync();
         }
     }
 }

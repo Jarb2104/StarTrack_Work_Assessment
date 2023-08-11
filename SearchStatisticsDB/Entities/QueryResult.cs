@@ -6,7 +6,7 @@ namespace SearchStatisticsDB.Entities
     public class QueryResult
     {
         [Key]
-        public int ResultID { get; set; }
+        public Guid ResultID { get; set; }
         public string Tittle { get; set; } = null!;
         public int AnswerCount { get; set; }
         public string UserName { get; set; } = string.Empty;

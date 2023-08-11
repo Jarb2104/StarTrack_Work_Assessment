@@ -1,9 +1,10 @@
 ﻿using SearchStatisticsDB.Entities;
+using StackExchangeQueryTracker.Models;
 
 namespace SearchStatisticsDB.Repositories
 {
     public interface IStackExchangeCallRepository
     {
-        public ValueTask<StackExchangeCall?> FindStackExchangeCall(int stackExchangeId);
+        public Task<StackExchangeCall?> FindStackExchangeCall(QueryStackExchangeModel stackExchangeId);
     }
 }
