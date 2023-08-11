@@ -11,6 +11,5 @@ namespace SearchStatisticsDB.Entities
         public int AnswerCount { get; set; }
         public string UserName { get; set; } = string.Empty;
         public string PicURL { get; set; } = string.Empty;
-        public DateTime QueryDate { get; set; }
     }
 }

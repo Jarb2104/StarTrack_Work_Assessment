@@ -14,8 +14,11 @@ namespace SearchStatisticsDB.Entities
         public string InTitle { get; set; } = string.Empty;
         [Required] 
         public string Site { get; set; } = string.Empty;
+        public int TimesRequested { get; set; }
+        public DateTime FirstTimeRequested { get; set; }
+        public DateTime LastTimeRequested { get; set; }
 
         [Required]
-        public ICollection<QueryResult> Results { get; set; } = null!;
+        public IList<QueryResult> Results { get; set; } = new List<QueryResult>();
     }
 }

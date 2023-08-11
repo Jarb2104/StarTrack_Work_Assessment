@@ -20,3 +20,6 @@
 /SearchStatisticsDB/Migrations/20230810235814_CreateDB.cs
 /SearchStatisticsDB/Migrations/20230810235814_CreateDB.Designer.cs
 /SearchStatisticsDB/Migrations/SearchStatisticsContextModelSnapshot.cs
+/SearchStatisticsDB/Migrations
+/StackExchangeQueryTracker/SearchStatistics.db-shm
+/StackExchangeQueryTracker/SearchStatistics.db-wal
