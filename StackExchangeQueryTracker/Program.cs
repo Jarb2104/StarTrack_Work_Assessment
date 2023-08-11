@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ISearchStatisticsDBRepository, SearchStatisticsDBRepository>();
 builder.Services.AddDbContext<SearchStatisticsContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("SearchStatisticsDB:SQLite")));
+builder.Services.AddMemoryCache();
 
 WebApplication app = builder.Build();
 

@@ -66,17 +66,15 @@ namespace StackExchangeQueryTracker.Controllers
             {
                 //Making the call to the endpoint of StackExchange.
                 stackExchangeResponse = await StackExchangeAPICalls.callSearchEndPoint(endPoint, URL, query);
-                if (stackExchangeResponse == null)
+                if (stackExchangeResponse != null)
                 {
-                    return NoContent();
+                    MemoryCacheEntryOptions cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(60))
+                        .SetAbsoluteExpiration(TimeSpan.FromMinutes(5))
+                        .SetPriority(CacheItemPriority.Normal);
+
+                    _memoryCache.Set(cacheKey, stackExchangeResponse, cacheEntryOptions);
                 }
-
-                MemoryCacheEntryOptions cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromSeconds(60))
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5))
-                    .SetPriority(CacheItemPriority.Normal);
-
-                _memoryCache.Set(cacheKey, stackExchangeResponse, cacheEntryOptions);
             }
 
 
@@ -92,8 +90,8 @@ namespace StackExchangeQueryTracker.Controllers
                 seachQueryStatisticsCall.InTitle = query.InTitle;
                 seachQueryStatisticsCall.Site = query.Site;
                 seachQueryStatisticsCall.FirstTimeRequested = DateTime.Now;
-                StackExchangeCallToEntity.StackExchangeResponseModelToEntity(stackExchangeResponse, seachQueryStatisticsCall);
 
+                if (stackExchangeResponse != null) StackExchangeCallToEntity.StackExchangeResponseModelToEntity(stackExchangeResponse, seachQueryStatisticsCall);
                 newQuery = true;
             }
 
@@ -106,9 +104,9 @@ namespace StackExchangeQueryTracker.Controllers
                 if (newQuery) await _repository.StackExchangeCall.AddStackExchangeCall(seachQueryStatisticsCall);
                 await _repository.Save();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                return BadRequest("Unable to save new data: " + ex.Message);
             }
 
             return Ok(seachQueryStatisticsCall);

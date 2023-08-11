@@ -9,7 +9,7 @@ namespace SearchStatisticsDB.Entities
         public Guid ResultID { get; set; }
         public string Tittle { get; set; } = null!;
         public int AnswerCount { get; set; }
-        public string UserName { get; set; } = string.Empty;
-        public string PicURL { get; set; } = string.Empty;
+        public string UserName { get; set; } = null!;
+        public string? PicURL { get; set; }
     }
 }

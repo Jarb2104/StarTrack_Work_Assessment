@@ -7,7 +7,7 @@ namespace SearchStatisticsDB.ModelToEntity
     {
         public static void StackExchangeResponseModelToEntity(StackExchangeResponseModel responseModel, StackExchangeCall stackExchangeCall)
         {
-            foreach(StackOverflowPost item in responseModel.items)
+            foreach (StackOverflowPost item in responseModel.items)
             {
                 QueryResult queryResult = new QueryResult();
                 queryResult.ResultID = Guid.NewGuid();
