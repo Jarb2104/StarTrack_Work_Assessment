@@ -1,5 +1,6 @@
 ﻿using API.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using SearchStatisticsDB.Entities;
 using SearchStatisticsDB.ModelToEntity;
 using SearchStatisticsDB.Repositories;
@@ -13,12 +14,14 @@ namespace StackExchangeQueryTracker.Controllers
     {
         private readonly ISearchStatisticsDBRepository _repository;
         private readonly IConfiguration _configuration;
+        private readonly IMemoryCache _memoryCache;
 
         //Initializing repository for DB connection.
-        public QueryController(ISearchStatisticsDBRepository repository, IConfiguration configuration)
+        public QueryController(ISearchStatisticsDBRepository repository, IConfiguration configuration, IMemoryCache memoryCache)
         {
             _repository = repository;
             _configuration = configuration;
+            _memoryCache = memoryCache;
         }
 
         [HttpPost]
@@ -47,7 +50,10 @@ namespace StackExchangeQueryTracker.Controllers
             string endPoint = _configuration.GetValue<string>("StackExchange:Query:EndPoint") ?? "";
             string URL = _configuration.GetValue<string>("StackExchange:Query:URL") ?? "";
             query.Site = _configuration.GetValue<string>("StackExchange:Query:Site") ?? "";
+            string cacheKey = query.Page.ToString() + query.PageSize.ToString() + query.InTitle + query.Site;
             bool newQuery = false;
+            StackExchangeResponseModel? stackExchangeResponse;
+            StackExchangeCall? seachQueryStatisticsCall;
 
             //Server error if configuration not found.
             if (string.IsNullOrWhiteSpace(endPoint) || string.IsNullOrWhiteSpace(URL))
@@ -55,11 +61,27 @@ namespace StackExchangeQueryTracker.Controllers
                 throw new Exception("Unable to get configuration");
             }
 
-            //Making the call to the endpoint of StackExchange.
-            StackExchangeResponseModel stackExchangeResponse = await StackExchangeAPICalls.callSearchEndPoint(endPoint, URL, query);
-            //Checking if a previous call with the same parameters exists.
-            StackExchangeCall? seachQueryStatisticsCall = await _repository.StackExchangeCall.FindStackExchangeCall(query);
+            //Checking cache for data
+            if (!_memoryCache.TryGetValue(cacheKey, out stackExchangeResponse!))
+            {
+                //Making the call to the endpoint of StackExchange.
+                stackExchangeResponse = await StackExchangeAPICalls.callSearchEndPoint(endPoint, URL, query);
+                if (stackExchangeResponse == null)
+                {
+                    return NoContent();
+                }
 
+                MemoryCacheEntryOptions cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(60))
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5))
+                    .SetPriority(CacheItemPriority.Normal);
+
+                _memoryCache.Set(cacheKey, stackExchangeResponse, cacheEntryOptions);
+            }
+
+
+            //Checking if a previous call with the same parameters exists.
+            seachQueryStatisticsCall = await _repository.StackExchangeCall.FindStackExchangeCall(query);
             if (seachQueryStatisticsCall == null)
             {
                 //Create a new call object with the query data.
@@ -74,7 +96,8 @@ namespace StackExchangeQueryTracker.Controllers
 
                 newQuery = true;
             }
-            
+
+            //Since this data is updated with every call, cache for it loses meaning as it has to be updated with every call, hence why seachQueryStatisticsCall doesn't get stored in cache.
             seachQueryStatisticsCall.TimesRequested++;
             seachQueryStatisticsCall.LastTimeRequested = DateTime.Now;
 
@@ -87,7 +110,7 @@ namespace StackExchangeQueryTracker.Controllers
             {
                 return NoContent();
             }
-            
+
             return Ok(seachQueryStatisticsCall);
         }
     }

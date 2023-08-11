@@ -7,10 +7,10 @@ namespace StackExchangeQueryTracker.StackExchangeAPI
 {
     public static class StackExchangeAPICalls
     {
-        public static async Task<StackExchangeResponseModel> callSearchEndPoint(string endPoint, string URL, QueryStackExchangeModel query)
+        public static async Task<StackExchangeResponseModel?> callSearchEndPoint(string endPoint, string URL, QueryStackExchangeModel query)
         {
             //Initializing variables
-            StackExchangeResponseModel responseModel;
+            StackExchangeResponseModel? responseModel = null;
 
             //Setting up the client for the API call
             HttpClientHandler handler = new HttpClientHandler()
@@ -33,9 +33,6 @@ namespace StackExchangeQueryTracker.StackExchangeAPI
             if (response.IsSuccessStatusCode)
             {
                 responseModel = await JsonSerializer.DeserializeAsync<StackExchangeResponseModel>(response.Content.ReadAsStream()) ?? new StackExchangeResponseModel();
-            }else
-            {
-                responseModel = new StackExchangeResponseModel();
             }
 
             return responseModel;
