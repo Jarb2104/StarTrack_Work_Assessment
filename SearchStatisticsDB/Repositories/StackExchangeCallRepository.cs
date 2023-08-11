@@ -17,6 +17,7 @@ namespace SearchStatisticsDB.Repositories
         public Task<StackExchangeCall?> FindStackExchangeCall(QueryStackExchangeModel query)
         {
             return _dbContext.StackExchangeCalls
+                .Include(sec => sec.Results)
                 .Where(sec => sec.Page == query.Page && sec.PageSize == query.PageSize && sec.InTitle.Equals(query.InTitle) && sec.Site.Equals(query.Site))
                 .SingleOrDefaultAsync();
         }
